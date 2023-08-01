@@ -75,22 +75,3 @@ function getWeatherData(location) {
 }
 
 getWeatherData("London");
-
-const currentWeatherData = getCurrentWeatherData("London").then((data) => {
-  const celcius = data.current.temp_c;
-  const fahrenheit = data.current.temp_f;
-  const windMph = data.current.wind_mph;
-  const conditionText = data.current.condition.text;
-  const { humidity } = data.current;
-  const lastUpdated = data.current.last_updated;
-  const parsedData = {
-    celcius,
-    fahrenheit,
-    data,
-    windMph,
-    conditionText,
-    humidity,
-    lastUpdated,
-  };
-  return parsedData;
-});

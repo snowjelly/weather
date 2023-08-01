@@ -59,6 +59,23 @@ async function getForecastWeatherData(location) {
   }
 }
 
+function getWeatherData(location) {
+  return Promise.all([
+    getYesterdaysWeatherData(location),
+    getForecastWeatherData(location),
+  ])
+    .then((response) => ({
+      yesterday: response[0],
+      today: response[1].today,
+      tomorrow: response[1].tomorrow,
+    }))
+    .then((response) => {
+      console.log(response);
+    });
+}
+
+getWeatherData("London");
+
 const currentWeatherData = getCurrentWeatherData("London").then((data) => {
   const celcius = data.current.temp_c;
   const fahrenheit = data.current.temp_f;
@@ -77,5 +94,3 @@ const currentWeatherData = getCurrentWeatherData("London").then((data) => {
   };
   return parsedData;
 });
-
-console.log(getYesterdaysWeatherData("London"));

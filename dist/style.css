@@ -1,0 +1,35 @@
+.header-container {
+  display: flex;
+  align-items: center;
+}
+
+.location {
+  margin-right: 0.2rem;
+  margin-left: 2rem;
+}
+
+.degrees {
+  display: flex;
+}
+
+.weather-header {
+  display: flex;
+  justify-content: center;
+}
+
+.weather-details {
+  display: flex;
+}
+
+.high-low {
+  display: flex;
+  align-items: center;
+}
+
+.high-container {
+  display: flex;
+}
+
+.low-container {
+  display: flex;
+}

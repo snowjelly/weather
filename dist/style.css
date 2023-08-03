@@ -1,4 +1,8 @@
 .header-container {
+  display: none;
+}
+
+.header-container[visible] {
   display: flex;
   align-items: center;
 }
@@ -13,6 +17,10 @@
 }
 
 .weather-header {
+  display: none;
+}
+
+.weather-header[visible] {
   display: flex;
   justify-content: center;
 }

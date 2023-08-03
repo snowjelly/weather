@@ -8,10 +8,6 @@ body {
   height: 100vh;
 }
 
-main {
-  padding-top: 2rem;
-}
-
 .header-container {
   display: none;
 }
@@ -57,7 +53,7 @@ main {
 }
 
 form {
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: center;
   row-gap: 1rem;
@@ -92,4 +88,38 @@ fieldset {
   border-radius: 0.3rem;
   font-size: 0.9rem;
   padding: 4px;
+}
+
+nav {
+  visibility: hidden;
+  width: 200px;
+  height: 100vh;
+  background-color: #737373;
+}
+
+nav[visible] {
+  visibility: visible;
+  animation: slide-right 500ms forwards;
+}
+
+nav[closing] {
+  animation: slide-left 500ms forwards;
+}
+
+@keyframes slide-right {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes slide-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }

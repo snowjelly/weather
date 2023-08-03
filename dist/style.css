@@ -4,8 +4,12 @@
   font-family: "Roboto Mono", monospace;
 }
 
+main {
+  height: 100%;
+}
+
 body {
-  height: 100vh;
+  height: calc(100vh - 39.2px);
 }
 
 .header-container {
@@ -93,8 +97,9 @@ fieldset {
 nav {
   visibility: hidden;
   width: 200px;
-  height: 100vh;
-  background-color: #737373;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 nav[visible] {
@@ -104,6 +109,11 @@ nav[visible] {
 
 nav[closing] {
   animation: slide-left 500ms forwards;
+}
+
+.nav-content {
+  flex: 1;
+  background-color: #737373;
 }
 
 @keyframes slide-right {

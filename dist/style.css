@@ -64,7 +64,7 @@ form {
   height: 175px;
   background-color: #94a3b8;
   border-radius: 0.4rem;
-  padding-inline: 1rem;
+  padding: 1rem;
   box-shadow: 0 0 2px 1px #737373;
 }
 
@@ -79,4 +79,17 @@ fieldset {
 .form {
   display: flex;
   justify-content: center;
+}
+
+.form-button {
+  display: flex;
+  justify-content: end;
+}
+
+.form-button > button {
+  background-color: #d1d7df;
+  border: 0;
+  border-radius: 0.3rem;
+  font-size: 0.9rem;
+  padding: 4px;
 }

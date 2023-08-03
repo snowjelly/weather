@@ -74,4 +74,4 @@ function getWeatherData(location) {
     });
 }
 
-getWeatherData("London");
+export default getWeatherData;

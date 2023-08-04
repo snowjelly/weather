@@ -99,7 +99,6 @@ nav {
   width: 200px;
   display: flex;
   flex-direction: column;
-  height: max(200px, 80%);
 }
 
 nav[visible] {

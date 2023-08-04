@@ -39,7 +39,29 @@
     </header>
     <main>
       <nav>
-        <div class="nav-content"></div>
+        <div class="nav-content">
+          <div class="form">
+            <form>
+              <h1>Enter a city or zip code</h1>
+              <input
+                type="text"
+                name="location"
+                id="location"
+                placeholder="City/Zip code"
+                required
+              />
+              <fieldset>
+                <input type="radio" name="degree" id="fahrenheight" checked />
+                <label for="fahrenheight">F°</label>
+                <input type="radio" name="degree" id="celcius" />
+                <label for="celcius">C°</label>
+              </fieldset>
+              <div class="form-button">
+                <button>Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
       </nav>
       <div class="weather-header">
         <div class="degrees">
@@ -61,27 +83,6 @@
           <p class="condition">Condition</p>
           <div class="gif">gif</div>
         </div>
-      </div>
-      <div class="form">
-        <form>
-          <h1>Enter a city or zip code</h1>
-          <input
-            type="text"
-            name="location"
-            id="location"
-            placeholder="City/Zip code"
-            required
-          />
-          <fieldset>
-            <input type="radio" name="degree" id="fahrenheight" checked />
-            <label for="fahrenheight">F°</label>
-            <input type="radio" name="degree" id="celcius" />
-            <label for="celcius">C°</label>
-          </fieldset>
-          <div class="form-button">
-            <button>Submit</button>
-          </div>
-        </form>
       </div>
     </main>
   </body>

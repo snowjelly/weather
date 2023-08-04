@@ -57,7 +57,7 @@ body {
 }
 
 form {
-  display: none;
+  display: block;
   flex-direction: column;
   justify-content: center;
   row-gap: 1rem;
@@ -99,7 +99,7 @@ nav {
   width: 200px;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: max(200px, 80%);
 }
 
 nav[visible] {
@@ -114,6 +114,7 @@ nav[closing] {
 .nav-content {
   flex: 1;
   background-color: #737373;
+  border-radius: 0 0.4rem 0.4rem 0;
 }
 
 @keyframes slide-right {

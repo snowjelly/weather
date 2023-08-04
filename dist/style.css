@@ -57,7 +57,7 @@ body {
 }
 
 form {
-  display: block;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   row-gap: 1rem;
@@ -78,7 +78,6 @@ fieldset {
 
 .form {
   display: flex;
-  justify-content: center;
 }
 
 .form-button {
@@ -132,4 +131,8 @@ nav[closing] {
   100% {
     transform: translateX(-100%);
   }
+}
+
+.form-header {
+  font-size: 1.2rem;
 }

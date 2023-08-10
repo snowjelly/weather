@@ -1,4 +1,8 @@
 import getWeatherData from "./api";
+import {
+  getLocationWeatherData,
+  saveLocationWeatherData,
+} from "./localStorage";
 
 const form = document.querySelector("form");
 const showNavBtn = document.querySelector(".hamburger");
@@ -6,7 +10,9 @@ const nav = document.querySelector("nav");
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  getWeatherData(document.querySelector("#location").value);
+  // so basically i need to grab the weather data in an async function
+  // await it then save it, then i can getthe data and log it
+  saveLocationWeatherData();
 });
 
 showNavBtn.addEventListener("click", (e) => {

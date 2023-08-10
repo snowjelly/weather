@@ -1,19 +1,25 @@
 import getWeatherData from "./api";
 
 function getLocationWeatherData() {
-  const data = JSON.parse(localStorage.getItem("locationWeatherData"));
-  console.log(data);
+  if (JSON.parse(localStorage.getItem("locationWeatherData")) === null) {
+    localStorage.setItem("locationWeatherData", JSON.stringify([]));
+  }
+
+  return JSON.parse(localStorage.getItem("locationWeatherData"));
 }
 
 async function saveLocationWeatherData() {
-  const locationFormResult = document.querySelector("#location").value;
-  const data = await getWeatherData(locationFormResult);
-  // last updated time. add a global clock that refreshes all locationweatherdata's in the array
-  const result = {
-    [locationFormResult]: data,
-  };
-  localStorage.setItem("locationWeatherData", JSON.stringify(result));
-  getLocationWeatherData();
+  const locationName = document.querySelector("#location").value;
+  const array = getLocationWeatherData();
+  const newEntry = (currentValue) => currentValue.name !== locationName;
+  if (array.every(newEntry) === false)
+    throw new Error(
+      "New entries cannot have the save name as an existing entry",
+    );
+  const data = await getWeatherData(locationName);
+  array.push(data);
+  localStorage.setItem("locationWeatherData", JSON.stringify(array));
+  return array;
 }
 
 export { saveLocationWeatherData, getLocationWeatherData };

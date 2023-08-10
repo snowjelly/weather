@@ -65,6 +65,7 @@ function getWeatherData(location) {
     getForecastWeatherData(location),
   ])
     .then((response) => ({
+      name: location,
       yesterday: response[0],
       today: response[1].today,
       tomorrow: response[1].tomorrow,

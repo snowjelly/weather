@@ -69,9 +69,7 @@ function getWeatherData(location) {
       today: response[1].today,
       tomorrow: response[1].tomorrow,
     }))
-    .then((response) => {
-      console.log(response);
-    });
+    .finally((response) => response);
 }
 
 export default getWeatherData;

@@ -1,14 +1,19 @@
 import getWeatherData from "./api";
 
-async function saveLocationWeatherData() {
-  const data = await getWeatherData(document.querySelector("#location").value);
-  console.log(data);
-  localStorage.setItem("locationWeatherData", JSON.stringify(data));
-}
-
 function getLocationWeatherData() {
   const data = JSON.parse(localStorage.getItem("locationWeatherData"));
   console.log(data);
+}
+
+async function saveLocationWeatherData() {
+  const locationFormResult = document.querySelector("#location").value;
+  const data = await getWeatherData(locationFormResult);
+  // last updated time. add a global clock that refreshes all locationweatherdata's in the array
+  const result = {
+    [locationFormResult]: data,
+  };
+  localStorage.setItem("locationWeatherData", JSON.stringify(result));
+  getLocationWeatherData();
 }
 
 export { saveLocationWeatherData, getLocationWeatherData };

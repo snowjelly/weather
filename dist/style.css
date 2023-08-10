@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&family=Roboto:ital@1&display=swap");
 
 * {
   font-family: "Roboto Mono", monospace;
@@ -134,4 +134,24 @@ nav[closing] {
 
 .form-header {
   font-size: 1.2rem;
+}
+
+#error {
+  font-family: "Roboto", sans-serif;
+  color: #ff2727;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+form.error {
+  background-color: #7f1d1d;
+}
+
+.form-button button {
+  background-color: #a3a3a3;
+}
+
+.form-button button:hover {
+  background-color: #737373;
+  box-shadow: 0 0 2px 1px #262626;
 }

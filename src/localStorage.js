@@ -14,7 +14,7 @@ async function saveLocationWeatherData() {
   const newEntry = (currentValue) => currentValue.name !== locationName;
   if (array.every(newEntry) === false)
     throw new Error(
-      "New entries cannot have the save name as an existing entry",
+      "New entries cannot have the same name as an existing entry",
     );
   const data = await getWeatherData(locationName);
   array.push(data);

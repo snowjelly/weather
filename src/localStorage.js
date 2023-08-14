@@ -12,6 +12,13 @@ function isError(obj) {
   return Object.prototype.toString.call(obj) === "[object Error]";
 }
 
+function saveFavoriteWeatherData() {
+  const weatherDataArray = getLocationWeatherData();
+  const favorite = weatherDataArray[0];
+  favorite.favorite = true;
+  localStorage.setItem("favorite", JSON.stringify(favorite));
+}
+
 async function saveLocationWeatherData() {
   const locationName = document.querySelector("#location").value;
   const array = getLocationWeatherData();
@@ -22,6 +29,7 @@ async function saveLocationWeatherData() {
   array.push(data);
   localStorage.setItem("locationWeatherData", JSON.stringify(array));
   console.log(data);
+  saveFavoriteWeatherData();
   return array;
 }
 

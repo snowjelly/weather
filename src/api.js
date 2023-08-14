@@ -33,10 +33,10 @@ async function getYesterdaysWeatherData(location) {
     );
     const dataJSON = await data.json();
     const yesterday = dataJSON.forecast.forecastday[0];
-    return yesterday;
+    const locationName = dataJSON.location.name;
+    return { locationName, yesterday };
   } catch (err) {
-    console.log(err);
-    return err;
+    throw new Error(err);
   }
 }
 
@@ -54,8 +54,7 @@ async function getForecastWeatherData(location) {
     };
     return parsedData;
   } catch (err) {
-    console.log(err);
-    return err;
+    throw new Error(err);
   }
 }
 
@@ -65,12 +64,13 @@ function getWeatherData(location) {
     getForecastWeatherData(location),
   ])
     .then((response) => ({
-      name: location,
-      yesterday: response[0],
+      name: response[0].locationName,
+      yesterday: response[0].yesterday,
       today: response[1].today,
       tomorrow: response[1].tomorrow,
     }))
-    .finally((response) => response);
+    .finally((response) => response)
+    .catch((err) => err);
 }
 
 export default getWeatherData;

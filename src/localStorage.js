@@ -8,6 +8,10 @@ function getLocationWeatherData() {
   return JSON.parse(localStorage.getItem("locationWeatherData"));
 }
 
+function isError(obj) {
+  return Object.prototype.toString.call(obj) === "[object Error]";
+}
+
 async function saveLocationWeatherData() {
   const locationName = document.querySelector("#location").value;
   const array = getLocationWeatherData();
@@ -17,6 +21,7 @@ async function saveLocationWeatherData() {
       "New entries cannot have the same name as an existing entry",
     );
   const data = await getWeatherData(locationName);
+  if (isError(data)) throw new Error("Invalid location");
   array.push(data);
   localStorage.setItem("locationWeatherData", JSON.stringify(array));
   return array;

@@ -15,15 +15,13 @@ function isError(obj) {
 async function saveLocationWeatherData() {
   const locationName = document.querySelector("#location").value;
   const array = getLocationWeatherData();
-  const newEntry = (currentValue) => currentValue.name !== locationName;
-  if (array.every(newEntry) === false)
-    throw new Error(
-      "New entries cannot have the same name as an existing entry",
-    );
   const data = await getWeatherData(locationName);
+  const newEntry = (currentValue) => currentValue.name !== data.name;
+  if (array.every(newEntry) === false) throw new Error("No duplicate entries");
   if (isError(data)) throw new Error("Invalid location");
   array.push(data);
   localStorage.setItem("locationWeatherData", JSON.stringify(array));
+  console.log(data);
   return array;
 }
 

@@ -1,4 +1,7 @@
-import { saveLocationWeatherData } from "./localStorage";
+import {
+  getLocationWeatherData,
+  saveLocationWeatherData,
+} from "./localStorage";
 
 const form = document.querySelector("form");
 const showNavBtn = document.querySelector(".hamburger");
@@ -36,3 +39,14 @@ showNavBtn.addEventListener("click", () => {
     );
   }
 });
+
+function renderWeatherList() {
+  const weatherDataArray = getLocationWeatherData();
+
+  for (let i = 0; i < weatherDataArray.length; i += 1) {
+    const parentUl = document.querySelector("#list-locations");
+    parentUl.innerHTML = `
+    <li>${weatherDataArray[i].name}</li>
+  `;
+  }
+}

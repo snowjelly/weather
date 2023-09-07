@@ -18,10 +18,27 @@ function removeErrors() {
   form.classList.remove("error");
 }
 
+function removeForm() {
+  const enterDataForm = document.querySelector("#enter-data");
+  enterDataForm.setAttribute("invisible", "");
+}
+
+function renderStage2() {
+  showNavBtn.setAttribute("visible", "");
+}
+
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   removeErrors();
-  saveLocationWeatherData().catch((err) => displayFormError(err));
+  saveLocationWeatherData()
+    .catch((err) => displayFormError(err))
+    .then((val) => {
+      if (val !== undefined) {
+        console.log("stage2");
+        removeForm();
+        renderStage2();
+      }
+    });
 });
 
 showNavBtn.addEventListener("click", () => {
@@ -50,3 +67,5 @@ function renderWeatherList() {
   `;
   }
 }
+
+export { renderStage2, removeForm };

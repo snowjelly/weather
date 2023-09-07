@@ -87,6 +87,10 @@ fieldset {
   height: 100%;
 }
 
+#enter-data[invisible] {
+  display: none;
+}
+
 .form-button {
   display: flex;
   justify-content: end;
@@ -124,6 +128,10 @@ nav[closing] {
 
 .hamburger {
   display: none;
+}
+
+.hamburger[visible] {
+  display: flex;
 }
 
 @keyframes slide-right {

@@ -1,4 +1,5 @@
 import {
+  getFavoriteWeatherData,
   getLocationWeatherData,
   saveLocationWeatherData,
 } from "./localStorage";
@@ -24,7 +25,11 @@ function removeForm() {
 }
 
 function renderStage2() {
+  const weatherHeader = document.querySelector(".weather-header");
+  const degreeHeader = document.querySelector(".degrees h1");
+  const favWeatherData = getFavoriteWeatherData();
   showNavBtn.setAttribute("visible", "");
+  weatherHeader.setAttribute("visible", "");
 }
 
 form.addEventListener("submit", (e) => {

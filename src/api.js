@@ -21,8 +21,7 @@ async function getCurrentWeatherData(location) {
     const dataJSON = await data.json();
     return dataJSON;
   } catch (err) {
-    console.log(err);
-    return err;
+    throw new Error(err);
   }
 }
 
@@ -62,12 +61,14 @@ function getWeatherData(location) {
   return Promise.all([
     getYesterdaysWeatherData(location),
     getForecastWeatherData(location),
+    getCurrentWeatherData(location),
   ])
     .then((response) => ({
       name: response[0].locationName,
       yesterday: response[0].yesterday,
       today: response[1].today,
       tomorrow: response[1].tomorrow,
+      current: response[2],
       favorite: false,
     }))
     .finally((response) => response)

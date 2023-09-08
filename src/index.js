@@ -28,6 +28,8 @@ function renderStage2() {
   const weatherHeader = document.querySelector(".weather-header");
   const degreeHeader = document.querySelector(".degrees h1");
   const favWeatherData = getFavoriteWeatherData();
+  const tempF = favWeatherData.current.current.temp_f;
+  degreeHeader.textContent = `${tempF} °`;
   showNavBtn.setAttribute("visible", "");
   weatherHeader.setAttribute("visible", "");
 }

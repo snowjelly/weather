@@ -177,3 +177,13 @@ form.error {
   background-color: #737373;
   box-shadow: 0 0 2px 1px #262626;
 }
+
+div.degrees {
+  margin: 0.67em 0;
+}
+
+h1.degrees {
+  margin: 0;
+  font-size: 5rem;
+  word-spacing: -4rem;
+}

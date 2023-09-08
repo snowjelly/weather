@@ -180,10 +180,42 @@ form.error {
 
 div.degrees {
   margin: 0.67em 0;
+  flex-direction: column;
+  row-gap: 0.5rem;
 }
 
 h1.degrees {
   margin: 0;
   font-size: 5rem;
   word-spacing: -4rem;
+}
+
+div.condition {
+  font-size: 1.5rem;
+}
+
+.location {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.location-content {
+  display: flex;
+}
+
+div.weather-details {
+  row-gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+
+.high-container > *,
+.low-container > *,
+.feels-like {
+  margin: 0;
+}
+
+.feels-like {
+  margin-left: 0.2rem;
 }

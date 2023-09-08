@@ -29,9 +29,24 @@ function renderStage2() {
   const degreeHeader = document.querySelector(".degrees h1");
   const favWeatherData = getFavoriteWeatherData();
   const tempF = favWeatherData.current.current.temp_f;
+  const high = favWeatherData.today.day.maxtemp_f;
+  const low = favWeatherData.today.day.mintemp_f;
+  const feelsLike = favWeatherData.current.current.feelslike_f;
+  const condition = document.querySelector("div.condition");
+  const location = document.querySelector(".location");
+  const highDiv = document.querySelector("#high");
+  const lowDiv = document.querySelector("#low");
+  const feelsLikeDiv = document.querySelector(".feels-like");
   degreeHeader.textContent = `${tempF} °`;
+  condition.textContent = favWeatherData.current.current.condition.text;
+  location.textContent = favWeatherData.name;
+  highDiv.textContent = high;
+  lowDiv.textContent = low;
+  feelsLikeDiv.textContent = `Feels like ${feelsLike}°`;
+
   showNavBtn.setAttribute("visible", "");
   weatherHeader.setAttribute("visible", "");
+  console.log(favWeatherData);
 }
 
 form.addEventListener("submit", (e) => {

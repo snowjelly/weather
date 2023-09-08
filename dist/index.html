@@ -45,21 +45,34 @@
       <div class="weather-header">
         <div class="degrees">
           <h1 class="degrees">Degrees°</h1>
-        </div>
-        <div class="weather-details">
-          <div class="high-low">
-            <div class="high-container">
-              <p class="small-degree">degrees</p>
-              <p class="degree-symbol">°</p>
+          <div class="condition">Condition</div>
+          <div class="weather-details">
+            <div class="location-content">
+              <div class="location">Location</div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24"
+                viewBox="0 -960 960 960"
+                width="24"
+              >
+                <path
+                  d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 294q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z"
+                />
+              </svg>
             </div>
-            /
-            <div class="low-container">
-              <p class="small-degree">degrees</p>
-              <p class="degree-symbol">°</p>
+            <div class="high-low">
+              <div class="high-container">
+                <p class="small-degree" id="high">degrees</p>
+                <p class="degree-symbol">°</p>
+              </div>
+              /
+              <div class="low-container">
+                <p class="small-degree" id="low">degrees</p>
+                <p class="degree-symbol">°</p>
+              </div>
+              <p class="feels-like">Feels like</p>
             </div>
           </div>
-          <p class="condition">Condition</p>
-          <div class="gif">gif</div>
         </div>
       </div>
     </main>

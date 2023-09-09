@@ -2,6 +2,7 @@ import getWeatherData from "./api";
 import {
   getFavoriteWeatherData,
   getLocationWeatherData,
+  saveFavoriteWeatherData,
   saveLocationWeatherData,
 } from "./localStorage";
 
@@ -30,6 +31,8 @@ async function renderStage2() {
   const degreeHeader = document.querySelector(".degrees h1");
   const favWeatherQuery = getFavoriteWeatherData().name;
   const favWeatherData = await getWeatherData(favWeatherQuery);
+  favWeatherData.favorite = true;
+  saveFavoriteWeatherData(favWeatherData);
   const tempF = favWeatherData.current.current.temp_f;
   const high = favWeatherData.today.day.maxtemp_f;
   const low = favWeatherData.today.day.mintemp_f;

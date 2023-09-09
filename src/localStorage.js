@@ -43,6 +43,7 @@ async function saveLocationWeatherData() {
 
 export {
   saveLocationWeatherData,
+  saveFavoriteWeatherData,
   getLocationWeatherData,
   getFavoriteWeatherData,
 };

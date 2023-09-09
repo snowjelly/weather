@@ -26,6 +26,16 @@ function removeForm() {
   enterDataForm.setAttribute("invisible", "");
 }
 
+function renderBgColor(weatherData) {
+  const condition = weatherData.current.current.condition.text;
+  const content = document.querySelector(".content");
+  if (condition === "sunny") {
+    content.setAttribute("bgColor", "sunny");
+  } else if (condition === "Partly cloudy") {
+    content.setAttribute("bg-color", "partly-cloudy");
+  }
+}
+
 async function renderStage2() {
   const weatherHeader = document.querySelector(".weather-header");
   const degreeHeader = document.querySelector(".degrees h1");
@@ -53,6 +63,7 @@ async function renderStage2() {
 
   showNavBtn.setAttribute("visible", "");
   weatherHeader.setAttribute("visible", "");
+  renderBgColor(favWeatherData);
   console.log(favWeatherData);
 }
 

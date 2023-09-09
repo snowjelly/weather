@@ -240,3 +240,11 @@ div.weather-details {
   bottom: 50%;
   top: 50%;
 }
+
+.content[bg-color="partly-cloudy"] {
+  background-color: #0ea5e9;
+}
+
+.content[bg-color="sunny"] {
+  background-color: #eab308;
+}

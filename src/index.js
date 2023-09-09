@@ -1,3 +1,4 @@
+import getWeatherData from "./api";
 import {
   getFavoriteWeatherData,
   getLocationWeatherData,
@@ -24,10 +25,11 @@ function removeForm() {
   enterDataForm.setAttribute("invisible", "");
 }
 
-function renderStage2() {
+async function renderStage2() {
   const weatherHeader = document.querySelector(".weather-header");
   const degreeHeader = document.querySelector(".degrees h1");
-  const favWeatherData = getFavoriteWeatherData();
+  const favWeatherQuery = getFavoriteWeatherData().name;
+  const favWeatherData = await getWeatherData(favWeatherQuery);
   const tempF = favWeatherData.current.current.temp_f;
   const high = favWeatherData.today.day.maxtemp_f;
   const low = favWeatherData.today.day.mintemp_f;

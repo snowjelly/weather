@@ -46,7 +46,9 @@ function iconSrcStringExtractor(src) {
 
 function renderTodayHourly(favWeatherData) {
   const hours = document.querySelectorAll(".time");
-  const time = favWeatherData.current.current.last_updated.slice(11);
+  const time = favWeatherData.current.current.last_updated.slice(11, 13);
+  let currentHour = "";
+  let viewNextHours = "";
   for (let i = 0; i < hours.length; i += 1) {
     hours[i].innerHTML = `
     <div>${i}:00</div>
@@ -55,10 +57,15 @@ function renderTodayHourly(favWeatherData) {
         favWeatherData.today.hour[i].condition.icon,
       )}"></img>
     </div>
-    <p class="temp">${favWeatherData.today.hour[i].temp_f}°</p>
+    <p class="temp">${Math.round(favWeatherData.today.hour[i].temp_f)}°</p>
     `;
+
+    if (`${i}` === time) {
+      currentHour = hours[i];
+      viewNextHours = hours[i + 6];
+    }
   }
-  console.log(time);
+  return viewNextHours;
 }
 
 async function renderStage2() {
@@ -82,23 +89,18 @@ async function renderStage2() {
   degreeHeader.textContent = `${tempF} °`;
   condition.textContent = favWeatherData.current.current.condition.text;
   location.textContent = favWeatherData.name;
-  highDiv.textContent = high;
-  lowDiv.textContent = low;
-  feelsLikeDiv.textContent = `Feels like ${feelsLike}°`;
+  highDiv.textContent = Math.round(high);
+  lowDiv.textContent = Math.round(low);
+  feelsLikeDiv.textContent = `Feels like ${Math.round(feelsLike)}°`;
 
-  const conditionIcon1 = document.querySelector(".condition-icon");
-  conditionIcon1.innerHTML = `<img src="${iconSrcStringExtractor(
-    favWeatherData.today.hour[0].condition.icon,
-  )}"></img>`;
-
-  const temp = document.querySelector('.time[time="0"] .temp');
-  temp.textContent = favWeatherData.today.hour[0].temp_fe;
-
-  renderTodayHourly(favWeatherData);
+  const viewNextHours = renderTodayHourly(favWeatherData);
 
   showNavBtn.setAttribute("visible", "");
   weatherHeader.setAttribute("visible", "");
   renderBgColor(favWeatherData);
+
+  viewNextHours.scrollIntoView();
+
   console.log(favWeatherData);
 }
 

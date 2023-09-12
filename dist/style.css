@@ -260,7 +260,7 @@ div.weather-details {
 
 .today {
   display: flex;
-  width: 30%;
+  width: 420px;
   overflow: scroll;
   padding: 1rem;
   border-radius: 1rem;

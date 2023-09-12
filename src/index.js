@@ -35,6 +35,8 @@ function renderBgColor(weatherData) {
     content.setAttribute("bg-color", "partly-cloudy");
   } else if (condition === "Overcast") {
     content.setAttribute("bg-color", "overcast");
+  } else if (condition === "Clear") {
+    content.setAttribute("bg-color", "clear");
   }
 }
 
@@ -44,6 +46,7 @@ function iconSrcStringExtractor(src) {
 
 function renderTodayHourly(favWeatherData) {
   const hours = document.querySelectorAll(".time");
+  const time = favWeatherData.current.current.last_updated.slice(11);
   for (let i = 0; i < hours.length; i += 1) {
     hours[i].innerHTML = `
     <div>${i}:00</div>
@@ -55,6 +58,7 @@ function renderTodayHourly(favWeatherData) {
     <p class="temp">${favWeatherData.today.hour[i].temp_f}°</p>
     `;
   }
+  console.log(time);
 }
 
 async function renderStage2() {

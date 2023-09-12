@@ -38,6 +38,7 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
+  row-gap: 3rem;
 }
 
 .weather-details {
@@ -253,8 +254,25 @@ div.weather-details {
   background-color: #fde68a;
 }
 
+.content[bg-color="clear"] {
+  background-color: #0ea5e9;
+}
+
 .today {
   display: flex;
-  width: 500px;
+  width: 30%;
   overflow: scroll;
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: #fafafa;
+}
+
+.time {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.temp {
+  margin: 0;
 }

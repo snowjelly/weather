@@ -29,10 +29,31 @@ function removeForm() {
 function renderBgColor(weatherData) {
   const condition = weatherData.current.current.condition.text;
   const content = document.querySelector(".content");
-  if (condition === "sunny") {
-    content.setAttribute("bgColor", "sunny");
+  if (condition === "Sunny") {
+    content.setAttribute("bg-color", "sunny");
   } else if (condition === "Partly cloudy") {
     content.setAttribute("bg-color", "partly-cloudy");
+  } else if (condition === "Overcast") {
+    content.setAttribute("bg-color", "overcast");
+  }
+}
+
+function iconSrcStringExtractor(src) {
+  return `https://${src.slice(2)}`;
+}
+
+function renderTodayHourly(favWeatherData) {
+  const hours = document.querySelectorAll(".time");
+  for (let i = 0; i < hours.length; i += 1) {
+    hours[i].innerHTML = `
+    <div>${i}:00</div>
+    <div class="condition-icon">
+      <img src="${iconSrcStringExtractor(
+        favWeatherData.today.hour[i].condition.icon,
+      )}"></img>
+    </div>
+    <p class="temp">${favWeatherData.today.hour[i].temp_f}°</p>
+    `;
   }
 }
 
@@ -60,6 +81,16 @@ async function renderStage2() {
   highDiv.textContent = high;
   lowDiv.textContent = low;
   feelsLikeDiv.textContent = `Feels like ${feelsLike}°`;
+
+  const conditionIcon1 = document.querySelector(".condition-icon");
+  conditionIcon1.innerHTML = `<img src="${iconSrcStringExtractor(
+    favWeatherData.today.hour[0].condition.icon,
+  )}"></img>`;
+
+  const temp = document.querySelector('.time[time="0"] .temp');
+  temp.textContent = favWeatherData.today.hour[0].temp_fe;
+
+  renderTodayHourly(favWeatherData);
 
   showNavBtn.setAttribute("visible", "");
   weatherHeader.setAttribute("visible", "");

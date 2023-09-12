@@ -242,9 +242,19 @@ div.weather-details {
 }
 
 .content[bg-color="partly-cloudy"] {
-  background-color: #0ea5e9;
+  background-color: #fde68a;
 }
 
 .content[bg-color="sunny"] {
   background-color: #eab308;
+}
+
+.content[bg-color="overcast"] {
+  background-color: #fde68a;
+}
+
+.today {
+  display: flex;
+  width: 500px;
+  overflow: scroll;
 }

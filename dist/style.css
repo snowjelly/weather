@@ -1,7 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&family=Roboto:ital@1&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
 
 * {
-  font-family: "Roboto Mono", monospace;
+  font-family: "Ubuntu", sans-serif;
 }
 
 main {
@@ -11,7 +11,6 @@ main {
 body {
   height: 100vh;
 }
-
 .header-container {
   display: none;
 }
@@ -38,7 +37,7 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
-  row-gap: 3rem;
+  justify-content: center;
 }
 
 .weather-details {
@@ -48,6 +47,7 @@ body {
 .high-low {
   display: flex;
   align-items: center;
+  font-size: 1rem;
 }
 
 .high-container {
@@ -183,33 +183,37 @@ form.error {
 div.degrees {
   margin: 0.67em 0;
   flex-direction: column;
-  row-gap: 0.5rem;
 }
 
 h1.degrees {
   margin: 0;
-  font-size: 5rem;
+  font-size: 6rem;
   word-spacing: -4rem;
 }
 
 div.condition {
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 
 .location {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
+}
+
+.location-svg {
+  height: 4rem;
+  width: 4rem;
 }
 
 .location-content {
   display: flex;
+  align-items: center;
 }
 
 div.weather-details {
   row-gap: 0.5rem;
   display: flex;
   flex-direction: column;
-  margin-top: 2rem;
 }
 
 .high-container > *,
@@ -258,7 +262,9 @@ div.weather-details {
   background-color: #0ea5e9;
 }
 
-.today {
+.today,
+.tomorrow,
+.yesterday {
   display: flex;
   width: 420px;
   overflow: scroll;
@@ -267,7 +273,9 @@ div.weather-details {
   background-color: #fafafa;
 }
 
-.time {
+.time-today,
+.time-tomorrow,
+.time-yesterday {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -275,4 +283,10 @@ div.weather-details {
 
 .temp {
   margin: 0;
+}
+
+.hourly > * {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

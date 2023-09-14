@@ -45,7 +45,7 @@ function iconSrcStringExtractor(src) {
 }
 
 function renderTodayHourly(favWeatherData) {
-  const hours = document.querySelectorAll(".time");
+  const hours = document.querySelectorAll(".time-today");
   const time = favWeatherData.current.current.last_updated.slice(11, 13);
   let currentHour = "";
   let viewNextHours = "";
@@ -58,6 +58,54 @@ function renderTodayHourly(favWeatherData) {
       )}"></img>
     </div>
     <p class="temp">${Math.round(favWeatherData.today.hour[i].temp_f)}°</p>
+    `;
+
+    if (`${i}` === time) {
+      currentHour = hours[i];
+      viewNextHours = hours[i + 6];
+    }
+  }
+  return viewNextHours;
+}
+
+function renderTomorrowHourly(favWeatherData) {
+  const hours = document.querySelectorAll(".time-tomorrow");
+  const time = favWeatherData.current.current.last_updated.slice(11, 13);
+  let currentHour = "";
+  let viewNextHours = "";
+  for (let i = 0; i < hours.length; i += 1) {
+    hours[i].innerHTML = `
+    <div>${i}:00</div>
+    <div class="condition-icon">
+      <img src="${iconSrcStringExtractor(
+        favWeatherData.tomorrow.hour[i].condition.icon,
+      )}"></img>
+    </div>
+    <p class="temp">${Math.round(favWeatherData.tomorrow.hour[i].temp_f)}°</p>
+    `;
+
+    if (`${i}` === time) {
+      currentHour = hours[i];
+      viewNextHours = hours[i + 6];
+    }
+  }
+  return viewNextHours;
+}
+
+function renderYesterdayHourly(favWeatherData) {
+  const hours = document.querySelectorAll(".time-yesterday");
+  const time = favWeatherData.current.current.last_updated.slice(11, 13);
+  let currentHour = "";
+  let viewNextHours = "";
+  for (let i = 0; i < hours.length; i += 1) {
+    hours[i].innerHTML = `
+    <div>${i}:00</div>
+    <div class="condition-icon">
+      <img src="${iconSrcStringExtractor(
+        favWeatherData.yesterday.hour[i].condition.icon,
+      )}"></img>
+    </div>
+    <p class="temp">${Math.round(favWeatherData.yesterday.hour[i].temp_f)}°</p>
     `;
 
     if (`${i}` === time) {
@@ -86,7 +134,7 @@ async function renderStage2() {
   const highDiv = document.querySelector("#high");
   const lowDiv = document.querySelector("#low");
   const feelsLikeDiv = document.querySelector(".feels-like");
-  degreeHeader.textContent = `${tempF} °`;
+  degreeHeader.textContent = `${Math.round(tempF)}°`;
   condition.textContent = favWeatherData.current.current.condition.text;
   location.textContent = favWeatherData.name;
   highDiv.textContent = Math.round(high);
@@ -94,12 +142,16 @@ async function renderStage2() {
   feelsLikeDiv.textContent = `Feels like ${Math.round(feelsLike)}°`;
 
   const viewNextHours = renderTodayHourly(favWeatherData);
+  const viewNextHoursTomorrow = renderTomorrowHourly(favWeatherData);
+  const viewNextHoursYesterday = renderYesterdayHourly(favWeatherData);
 
   showNavBtn.setAttribute("visible", "");
   weatherHeader.setAttribute("visible", "");
   renderBgColor(favWeatherData);
 
   viewNextHours.scrollIntoView();
+  viewNextHoursTomorrow.scrollIntoView();
+  viewNextHoursYesterday.scrollIntoView();
 
   console.log(favWeatherData);
 }

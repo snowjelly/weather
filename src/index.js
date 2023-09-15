@@ -197,4 +197,9 @@ function renderWeatherList() {
   }
 }
 
+// render stage2 every 15 minutes
+setInterval(() => {
+  renderStage2();
+}, 900000);
+
 export { renderStage2, removeForm };

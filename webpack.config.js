@@ -15,6 +15,7 @@ module.exports = {
   devtool: "inline-source-map",
   devServer: {
     static: "./dist",
+    port: 9000,
   },
   optimization: {
     runtimeChunk: "single",

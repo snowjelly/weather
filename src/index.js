@@ -26,6 +26,19 @@ function removeForm() {
   enterDataForm.setAttribute("invisible", "");
 }
 
+function showForm() {
+  const enterDataForm = document.querySelector("#enter-data");
+  enterDataForm.removeAttribute("invisible");
+}
+
+function renderStage3() {
+  const weatherHeader = document.querySelector(".weather-header");
+
+  showForm();
+  showNavBtn.removeAttribute("visible");
+  weatherHeader.removeAttribute("visible");
+}
+
 function renderBgColor(weatherData) {
   const condition = weatherData.current.current.condition.text;
   const content = document.querySelector(".content");
@@ -171,19 +184,7 @@ form.addEventListener("submit", (e) => {
 });
 
 showNavBtn.addEventListener("click", () => {
-  if (nav.getAttribute("visible") === null) {
-    nav.setAttribute("visible", "");
-  } else {
-    nav.setAttribute("closing", "");
-    nav.addEventListener(
-      "animationend",
-      () => {
-        nav.removeAttribute("visible");
-        nav.removeAttribute("closing", "");
-      },
-      { once: true },
-    );
-  }
+  renderStage3();
 });
 
 function renderWeatherList() {

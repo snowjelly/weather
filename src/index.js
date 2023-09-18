@@ -57,76 +57,32 @@ function iconSrcStringExtractor(src) {
   return `https://${src.slice(2)}`;
 }
 
-function renderTodayHourly(favWeatherData) {
-  const hours = document.querySelectorAll(".time-today");
-  const time = favWeatherData.current.current.last_updated.slice(11, 13);
-  let currentHour = "";
-  let viewNextHours = "";
+function renderHourly(day, favWeatherData) {
+  const hours = document.querySelectorAll(`.time-${day}`);
   for (let i = 0; i < hours.length; i += 1) {
     hours[i].innerHTML = `
-    <div>${i}:00</div>
+    <div class="time">${i}:00</div>
     <div class="condition-icon">
       <img src="${iconSrcStringExtractor(
-        favWeatherData.today.hour[i].condition.icon,
+        favWeatherData[day].hour[i].condition.icon,
       )}"></img>
     </div>
-    <p class="temp">${Math.round(favWeatherData.today.hour[i].temp_f)}°</p>
+    <p class="temp">${Math.round(favWeatherData[day].hour[i].temp_f)}°</p>
     `;
-
-    if (`${i}` === time) {
-      currentHour = hours[i];
-      viewNextHours = hours[i + 6];
-    }
   }
-  return viewNextHours;
 }
 
-function renderTomorrowHourly(favWeatherData) {
-  const hours = document.querySelectorAll(".time-tomorrow");
-  const time = favWeatherData.current.current.last_updated.slice(11, 13);
-  let currentHour = "";
-  let viewNextHours = "";
-  for (let i = 0; i < hours.length; i += 1) {
-    hours[i].innerHTML = `
-    <div>${i}:00</div>
-    <div class="condition-icon">
-      <img src="${iconSrcStringExtractor(
-        favWeatherData.tomorrow.hour[i].condition.icon,
-      )}"></img>
-    </div>
-    <p class="temp">${Math.round(favWeatherData.tomorrow.hour[i].temp_f)}°</p>
-    `;
+function getScrollToValue(day, favWeatherData) {
+  const currentTime = favWeatherData.current.current.last_updated.slice(11, 13);
+  const hourlyTimeElements = document.querySelectorAll(`.time-${day}`);
+  let scrollValue = null;
 
-    if (`${i}` === time) {
-      currentHour = hours[i];
-      viewNextHours = hours[i + 6];
+  for (let i = 0; i < hourlyTimeElements.length; i += 1) {
+    if (i.toString() === currentTime) {
+      scrollValue = hourlyTimeElements[i];
     }
   }
-  return viewNextHours;
-}
-
-function renderYesterdayHourly(favWeatherData) {
-  const hours = document.querySelectorAll(".time-yesterday");
-  const time = favWeatherData.current.current.last_updated.slice(11, 13);
-  let currentHour = "";
-  let viewNextHours = "";
-  for (let i = 0; i < hours.length; i += 1) {
-    hours[i].innerHTML = `
-    <div>${i}:00</div>
-    <div class="condition-icon">
-      <img src="${iconSrcStringExtractor(
-        favWeatherData.yesterday.hour[i].condition.icon,
-      )}"></img>
-    </div>
-    <p class="temp">${Math.round(favWeatherData.yesterday.hour[i].temp_f)}°</p>
-    `;
-
-    if (`${i}` === time) {
-      currentHour = hours[i];
-      viewNextHours = hours[i + 6];
-    }
-  }
-  return viewNextHours;
+  return scrollValue;
 }
 
 async function renderStage2() {
@@ -154,17 +110,15 @@ async function renderStage2() {
   lowDiv.textContent = Math.round(low);
   feelsLikeDiv.textContent = `Feels like ${Math.round(feelsLike)}°`;
 
-  const viewNextHours = renderTodayHourly(favWeatherData);
-  const viewNextHoursTomorrow = renderTomorrowHourly(favWeatherData);
-  const viewNextHoursYesterday = renderYesterdayHourly(favWeatherData);
+  renderHourly("today", favWeatherData);
+  renderHourly("tomorrow", favWeatherData);
 
   showNavBtn.setAttribute("visible", "");
   weatherHeader.setAttribute("visible", "");
   renderBgColor(favWeatherData);
 
-  viewNextHours.scrollIntoView();
-  viewNextHoursTomorrow.scrollIntoView();
-  viewNextHoursYesterday.scrollIntoView();
+  getScrollToValue("today", favWeatherData).scrollIntoView();
+  getScrollToValue("tomorrow", favWeatherData).scrollIntoView();
 
   console.log(favWeatherData);
 }

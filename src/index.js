@@ -79,7 +79,10 @@ function getScrollToValue(day, favWeatherData) {
 
   for (let i = 0; i < hourlyTimeElements.length; i += 1) {
     if (i.toString() === currentTime) {
-      scrollValue = hourlyTimeElements[i];
+      if (i > hourlyTimeElements.length - 6) {
+        scrollValue = hourlyTimeElements[i];
+      }
+      scrollValue = hourlyTimeElements[i + 6];
     }
   }
   return scrollValue;

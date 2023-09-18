@@ -95,7 +95,6 @@ async function renderStage2() {
   document.querySelector(".loading").setAttribute("visible", "");
   const favWeatherData = await getWeatherData(favWeatherQuery);
   document.querySelector(".loading").removeAttribute("visible");
-  favWeatherData.favorite = true;
   saveFavoriteWeatherData(favWeatherData);
   const tempF = favWeatherData.current.current.temp_f;
   const high = favWeatherData.today.day.maxtemp_f;

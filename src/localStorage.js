@@ -31,7 +31,6 @@ async function saveLocationWeatherData() {
   if (isError(data)) throw new Error("Invalid location");
 
   if (getFavoriteWeatherData() === null) {
-    data.favorite = true;
     saveFavoriteWeatherData(data);
   }
 

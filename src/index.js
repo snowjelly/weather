@@ -161,7 +161,7 @@ async function changeFavorite(e) {
   const favWeatherQuery = getLocationQueryString(e);
   const weatherData = await getWeatherData(favWeatherQuery);
   console.log(weatherData);
-  // saveFavoriteWeatherData(weatherData);
+  saveFavoriteWeatherData(weatherData);
 }
 
 function cancelForm() {

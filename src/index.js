@@ -70,7 +70,9 @@ function renderStoredLocationList() {
       )}</div>
     </div>
     <div class="list-temp-container">
-      <div class="list-temp">${locationList[i].current.current.temp_f} °</div>
+      <div class="list-temp">${Math.floor(
+        locationList[i].current.current.temp_f,
+      )} °</div>
       <img src="${iconSrcStringExtractor(
         locationList[i].current.current.condition.icon,
       )}"></img>

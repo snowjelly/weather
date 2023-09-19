@@ -305,15 +305,15 @@ div.weather-details {
 
 .location-list {
   width: 80%;
-  padding: 1rem;
-  background-color: #94a3b8;
-  border-radius: 0.4rem;
-  box-shadow: 0 0 2px 1px #737373;
 }
 
 .location-list-item {
   display: flex;
   justify-content: space-between;
+  padding: 1rem;
+  background-color: #94a3b8;
+  border-radius: 0.4rem;
+  box-shadow: 0 0 2px 1px #737373;
 }
 
 .list-temp-container {

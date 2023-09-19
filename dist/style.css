@@ -87,6 +87,7 @@ fieldset {
   align-items: center;
   flex-direction: column;
   height: 100%;
+  row-gap: 2rem;
 }
 
 #enter-data[invisible] {
@@ -293,4 +294,33 @@ div.weather-details {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.location-list {
+  width: 80%;
+  padding: 1rem;
+  background-color: #94a3b8;
+  border-radius: 0.4rem;
+  box-shadow: 0 0 2px 1px #737373;
+}
+
+.location-list-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.list-temp-container {
+  display: flex;
+  align-items: center;
+}
+
+.list-info {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.saved-locations {
+  font-size: 1.4rem;
+  margin: 0;
 }

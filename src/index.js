@@ -1,3 +1,4 @@
+import { format, lightFormat } from "date-fns";
 import getWeatherData from "./api";
 import {
   getFavoriteWeatherData,
@@ -31,6 +32,19 @@ function showForm() {
   enterDataForm.removeAttribute("invisible");
 }
 
+function getReadableDate(date) {
+  const fullDate = date.slice("0", "10");
+  const time = date.slice("10");
+  const yyyy = fullDate.slice("0", "4");
+  const mm = fullDate.slice("5", "7") - 1;
+  const dd = fullDate.slice("8");
+  return format(new Date(yyyy, mm, dd), `MMMM d,${time}`);
+}
+
+function iconSrcStringExtractor(src) {
+  return `https://${src.slice(2)}`;
+}
+
 function renderStoredLocationList() {
   const locationList = getLocationWeatherData();
   const locationListDiv = document.querySelector(".location-list");
@@ -39,7 +53,22 @@ function renderStoredLocationList() {
   for (let i = 0; i < locationList.length; i += 1) {
     const location = document.createElement("div");
     location.classList.add("location-list-item");
-    location.innerHTML = `<div class="list-name">${locationList[i].name}</div>`;
+    location.innerHTML = `
+    <div class="list-info">
+      <div class="list-name">${locationList[i].name}, ${
+        locationList[i].current.location.region
+      }</div>
+      <div class="list-last-updated">${getReadableDate(
+        locationList[i].current.current.last_updated,
+      )}</div>
+    </div>
+    <div class="list-temp-container">
+      <div class="list-temp">${locationList[i].current.current.temp_f} °</div>
+      <img src="${iconSrcStringExtractor(
+        locationList[i].current.current.condition.icon,
+      )}"></img>
+    </div>
+    `;
     locationListDiv.appendChild(location);
   }
 }
@@ -70,10 +99,6 @@ function renderBgColor(weatherData) {
   } else if (condition === "Clear") {
     content.setAttribute("bg-color", "clear");
   }
-}
-
-function iconSrcStringExtractor(src) {
-  return `https://${src.slice(2)}`;
 }
 
 function renderHourly(day, favWeatherData) {

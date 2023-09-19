@@ -227,10 +227,14 @@ div.weather-details {
 }
 
 .content {
-  display: grid;
+  display: none;
   justify-content: center;
   grid-template-columns: min-content 1fr;
   height: 100%;
+}
+
+.content[visible] {
+  display: grid;
 }
 
 .loading {

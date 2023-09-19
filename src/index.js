@@ -31,12 +31,32 @@ function showForm() {
   enterDataForm.removeAttribute("invisible");
 }
 
+function renderStoredLocationList() {
+  const locationList = getLocationWeatherData();
+  console.log(locationList);
+
+  const locationListDiv = document.createElement("div");
+  locationListDiv.classList.add("location-list");
+  document.querySelector("#enter-data").appendChild(locationListDiv);
+
+  for (let i = 0; i < locationList.length; i += 1) {
+    const location = document.createElement("div");
+    location.classList.add("location-list-item");
+    location.innerHTML = `<div class="list-name">${locationList[i].name}</div>`;
+    locationListDiv.appendChild(location);
+  }
+}
+
 function renderStage3() {
   const weatherHeader = document.querySelector(".weather-header");
+  const content = document.querySelector(".content");
 
-  showForm();
   showNavBtn.removeAttribute("visible");
   weatherHeader.removeAttribute("visible");
+  content.removeAttribute("visible");
+
+  showForm();
+  renderStoredLocationList();
 }
 
 function renderBgColor(weatherData) {
@@ -78,7 +98,7 @@ function getScrollToValue(day, favWeatherData) {
   let scrollValue = null;
 
   for (let i = 0; i < hourlyTimeElements.length; i += 1) {
-    if (i.toString() === currentTime) {
+    if (i === Math.floor(currentTime)) {
       if (i > hourlyTimeElements.length - 6) {
         scrollValue = hourlyTimeElements[i];
       }
@@ -89,6 +109,8 @@ function getScrollToValue(day, favWeatherData) {
 }
 
 async function renderStage2() {
+  const content = document.querySelector(".content");
+  content.setAttribute("visible", "");
   const weatherHeader = document.querySelector(".weather-header");
   const degreeHeader = document.querySelector(".degrees h1");
   const favWeatherQuery = getFavoriteWeatherData().name;

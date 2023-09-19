@@ -73,20 +73,6 @@ function renderStoredLocationList() {
   }
 }
 
-function renderStage3() {
-  const weatherHeader = document.querySelector(".weather-header");
-  const content = document.querySelector(".content");
-
-  showNavBtn.removeAttribute("visible");
-  weatherHeader.removeAttribute("visible");
-  content.removeAttribute("visible");
-
-  showForm();
-  const locationListDiv = document.querySelector(".location-list");
-  locationListDiv.innerHTML = "";
-  renderStoredLocationList();
-}
-
 function renderBgColor(weatherData) {
   const condition = weatherData.current.current.condition.text;
   const content = document.querySelector(".content");
@@ -161,6 +147,32 @@ async function renderStage2() {
   console.log(favWeatherData);
 }
 
+function renderStage3() {
+  const weatherHeader = document.querySelector(".weather-header");
+  const content = document.querySelector(".content");
+  const formBtns = document.querySelector(".form-button");
+  const locationListDiv = document.querySelector(".location-list");
+  const cancelBtn = document.createElement("button");
+  const submitBtn = document.querySelector(".submit-btn");
+
+  cancelBtn.classList.add("cancel-btn");
+  cancelBtn.textContent = "Cancel";
+  cancelBtn.addEventListener("click", () => {
+    removeForm();
+    renderStage2();
+    cancelBtn.remove();
+  });
+
+  showNavBtn.removeAttribute("visible");
+  weatherHeader.removeAttribute("visible");
+  content.removeAttribute("visible");
+
+  showForm();
+  locationListDiv.innerHTML = "";
+  renderStoredLocationList();
+  formBtns.insertBefore(cancelBtn, submitBtn);
+}
+
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   removeErrors();
@@ -192,6 +204,9 @@ function renderWeatherList() {
 
 // render stage2 every 15 minutes
 setInterval(() => {
+  if (!document.querySelector(".content").getAttribute("visible")) {
+    return;
+  }
   renderStage2();
 }, 900000);
 

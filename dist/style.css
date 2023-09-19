@@ -174,11 +174,18 @@ form.error {
 .form-button button {
   background-color: #a3a3a3;
   box-shadow: 0 0 1px 0.5px #0a0a0a;
+  padding-inline: 1rem;
+  cursor: pointer;
 }
 
 .form-button button:hover {
   background-color: #737373;
   box-shadow: 0 0 2px 1px #262626;
+}
+
+.form-button {
+  display: flex;
+  column-gap: 1rem;
 }
 
 div.degrees {

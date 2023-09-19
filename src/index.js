@@ -161,7 +161,7 @@ async function changeFavorite(e) {
   const favWeatherQuery = getLocationQueryString(e);
   const weatherData = await getWeatherData(favWeatherQuery);
   console.log(weatherData);
-  saveFavoriteWeatherData(weatherData);
+  return weatherData;
 }
 
 function cancelForm() {
@@ -170,14 +170,17 @@ function cancelForm() {
   document.querySelector(".cancel-btn").remove();
 }
 
+async function stage4(e) {
+  const newWeatherData = await changeFavorite(e);
+  saveFavoriteWeatherData(newWeatherData);
+  await renderStage2();
+  cancelForm();
+}
+
 function addLocationListEventListeners() {
   const locations = document.querySelectorAll(".location-list-item");
   for (let i = 0; i < locations.length; i += 1) {
-    locations[i].addEventListener("click", (e) => {
-      changeFavorite(e);
-      renderStage2();
-      cancelForm();
-    });
+    locations[i].addEventListener("click", stage4);
   }
 }
 

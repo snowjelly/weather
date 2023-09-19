@@ -165,9 +165,9 @@ async function changeFavorite(e) {
 }
 
 function cancelForm() {
+  document.querySelector(".cancel-btn").remove();
   removeForm();
   renderStage2();
-  document.querySelector(".cancel-btn").remove();
 }
 
 async function stage4(e) {
@@ -215,6 +215,7 @@ form.addEventListener("submit", (e) => {
     .then((val) => {
       if (val !== undefined) {
         console.log("stage2");
+        document.querySelector(".cancel-btn");
         removeForm();
         renderStage2();
       }

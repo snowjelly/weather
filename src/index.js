@@ -33,11 +33,8 @@ function showForm() {
 
 function renderStoredLocationList() {
   const locationList = getLocationWeatherData();
+  const locationListDiv = document.querySelector(".location-list");
   console.log(locationList);
-
-  const locationListDiv = document.createElement("div");
-  locationListDiv.classList.add("location-list");
-  document.querySelector("#enter-data").appendChild(locationListDiv);
 
   for (let i = 0; i < locationList.length; i += 1) {
     const location = document.createElement("div");
@@ -56,6 +53,8 @@ function renderStage3() {
   content.removeAttribute("visible");
 
   showForm();
+  const locationListDiv = document.querySelector(".location-list");
+  locationListDiv.innerHTML = "";
   renderStoredLocationList();
 }
 
@@ -133,9 +132,6 @@ async function renderStage2() {
   showNavBtn.setAttribute("visible", "");
   weatherHeader.setAttribute("visible", "");
   renderBgColor(favWeatherData);
-
-  getScrollToValue("today", favWeatherData).scrollIntoView();
-  getScrollToValue("tomorrow", favWeatherData).scrollIntoView();
 
   console.log(favWeatherData);
 }

@@ -27,6 +27,8 @@ async function saveLocationWeatherData() {
   const data = await getWeatherData(locationName);
   const newEntry = (currentValue) => currentValue.name !== data.name;
 
+  console.log(locationName, array, data);
+
   if (array.every(newEntry) === false) throw new Error("No duplicate entries");
   if (isError(data)) throw new Error("Invalid location");
 

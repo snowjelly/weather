@@ -32,14 +32,18 @@ async function saveLocationWeatherData() {
   if (array.every(newEntry) === false) throw new Error("No duplicate entries");
   if (isError(data)) throw new Error("Invalid location");
 
-  if (getFavoriteWeatherData() === null) {
-    saveFavoriteWeatherData(data);
-  }
-
   array.push(data);
   localStorage.setItem("locationWeatherData", JSON.stringify(array));
+  saveFavoriteWeatherData(data);
   console.log(data);
   return array;
+}
+
+async function reloadFavWeatherData() {
+  const favWeatherDataQuery = getFavoriteWeatherData().name;
+  const reloadedFavWeatherData = await getWeatherData(favWeatherDataQuery);
+  saveFavoriteWeatherData(reloadedFavWeatherData);
+  return reloadedFavWeatherData;
 }
 
 export {
@@ -47,4 +51,5 @@ export {
   saveFavoriteWeatherData,
   getLocationWeatherData,
   getFavoriteWeatherData,
+  reloadFavWeatherData,
 };

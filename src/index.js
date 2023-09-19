@@ -3,6 +3,7 @@ import getWeatherData from "./api";
 import {
   getFavoriteWeatherData,
   getLocationWeatherData,
+  reloadFavWeatherData,
   saveFavoriteWeatherData,
   saveLocationWeatherData,
 } from "./localStorage";
@@ -45,6 +46,12 @@ function iconSrcStringExtractor(src) {
   return `https://${src.slice(2)}`;
 }
 
+function getLocationQueryString(e) {
+  const favWeatherQuery =
+    e.currentTarget.children[0].children[0].textContent.split(", ")[0];
+  return favWeatherQuery;
+}
+
 function renderStoredLocationList() {
   const locationList = getLocationWeatherData();
   const locationListDiv = document.querySelector(".location-list");
@@ -73,8 +80,9 @@ function renderStoredLocationList() {
   }
 }
 
-function renderBgColor(weatherData) {
-  const condition = weatherData.current.current.condition.text;
+async function renderBgColor() {
+  const favWeatherData = await reloadFavWeatherData();
+  const condition = favWeatherData.current.current.condition.text;
   const content = document.querySelector(".content");
   if (condition === "Sunny") {
     content.setAttribute("bg-color", "sunny");
@@ -87,7 +95,8 @@ function renderBgColor(weatherData) {
   }
 }
 
-function renderHourly(day, favWeatherData) {
+async function renderHourly(day) {
+  const favWeatherData = await reloadFavWeatherData();
   const currentTime = favWeatherData.current.current.last_updated.slice(11, 13);
   const hours = document.querySelectorAll(`.time-${day}`);
   for (let i = Math.floor(currentTime); i < hours.length; i += 1) {
@@ -103,7 +112,8 @@ function renderHourly(day, favWeatherData) {
   }
 }
 
-function getScrollToValue(day, favWeatherData) {
+function getScrollToValue(day) {
+  const favWeatherData = reloadFavWeatherData();
   const currentTime = favWeatherData.current.current.last_updated.slice(11, 13);
   const hourlyTimeElements = document.querySelectorAll(`.time-${day}`);
   const scrollValue = hourlyTimeElements[Math.floor(currentTime)];
@@ -116,9 +126,9 @@ async function renderStage2() {
   content.setAttribute("visible", "");
   const weatherHeader = document.querySelector(".weather-header");
   const degreeHeader = document.querySelector(".degrees h1");
-  const favWeatherQuery = getFavoriteWeatherData().name;
   document.querySelector(".loading").setAttribute("visible", "");
-  const favWeatherData = await getWeatherData(favWeatherQuery);
+  const favWeatherData = await reloadFavWeatherData();
+  console.log(favWeatherData);
   document.querySelector(".loading").removeAttribute("visible");
   saveFavoriteWeatherData(favWeatherData);
   const tempF = favWeatherData.current.current.temp_f;
@@ -147,6 +157,30 @@ async function renderStage2() {
   console.log(favWeatherData);
 }
 
+async function changeFavorite(e) {
+  const favWeatherQuery = getLocationQueryString(e);
+  const weatherData = await getWeatherData(favWeatherQuery);
+  console.log(weatherData);
+  // saveFavoriteWeatherData(weatherData);
+}
+
+function cancelForm() {
+  removeForm();
+  renderStage2();
+  document.querySelector(".cancel-btn").remove();
+}
+
+function addLocationListEventListeners() {
+  const locations = document.querySelectorAll(".location-list-item");
+  for (let i = 0; i < locations.length; i += 1) {
+    locations[i].addEventListener("click", (e) => {
+      changeFavorite(e);
+      renderStage2();
+      cancelForm();
+    });
+  }
+}
+
 function renderStage3() {
   const weatherHeader = document.querySelector(".weather-header");
   const content = document.querySelector(".content");
@@ -157,11 +191,7 @@ function renderStage3() {
 
   cancelBtn.classList.add("cancel-btn");
   cancelBtn.textContent = "Cancel";
-  cancelBtn.addEventListener("click", () => {
-    removeForm();
-    renderStage2();
-    cancelBtn.remove();
-  });
+  cancelBtn.addEventListener("click", cancelForm);
 
   showNavBtn.removeAttribute("visible");
   weatherHeader.removeAttribute("visible");
@@ -170,6 +200,7 @@ function renderStage3() {
   showForm();
   locationListDiv.innerHTML = "";
   renderStoredLocationList();
+  addLocationListEventListeners();
   formBtns.insertBefore(cancelBtn, submitBtn);
 }
 

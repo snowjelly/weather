@@ -69,7 +69,6 @@ function getWeatherData(location) {
       today: response[1].today,
       tomorrow: response[1].tomorrow,
       current: response[2],
-      favorite: false,
     }))
     .finally((response) => response)
     .catch((err) => err);

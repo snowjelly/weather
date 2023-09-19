@@ -217,7 +217,7 @@ form.addEventListener("submit", (e) => {
     .then((val) => {
       if (val !== undefined) {
         console.log("stage2");
-        document.querySelector(".cancel-btn");
+        document.querySelector(".cancel-btn").remove();
         removeForm();
         renderStage2();
       }

@@ -78,8 +78,9 @@ function iconSrcStringExtractor(src) {
 }
 
 function renderHourly(day, favWeatherData) {
+  const currentTime = favWeatherData.current.current.last_updated.slice(11, 13);
   const hours = document.querySelectorAll(`.time-${day}`);
-  for (let i = 0; i < hours.length; i += 1) {
+  for (let i = Math.floor(currentTime); i < hours.length; i += 1) {
     hours[i].innerHTML = `
     <div class="time">${i}:00</div>
     <div class="condition-icon">
@@ -95,16 +96,8 @@ function renderHourly(day, favWeatherData) {
 function getScrollToValue(day, favWeatherData) {
   const currentTime = favWeatherData.current.current.last_updated.slice(11, 13);
   const hourlyTimeElements = document.querySelectorAll(`.time-${day}`);
-  let scrollValue = null;
+  const scrollValue = hourlyTimeElements[Math.floor(currentTime)];
 
-  for (let i = 0; i < hourlyTimeElements.length; i += 1) {
-    if (i === Math.floor(currentTime)) {
-      if (i > hourlyTimeElements.length - 6) {
-        scrollValue = hourlyTimeElements[i];
-      }
-      scrollValue = hourlyTimeElements[i + 6];
-    }
-  }
   return scrollValue;
 }
 

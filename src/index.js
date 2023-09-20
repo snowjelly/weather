@@ -200,7 +200,7 @@ async function stage4(e) {
   const newWeatherData = await changeFavorite(e);
   saveFavoriteWeatherData(newWeatherData);
   await renderStage2();
-  cancelForm();
+  cancelForm(e);
 }
 
 function addLocationListEventListeners() {

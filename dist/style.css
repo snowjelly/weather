@@ -326,7 +326,8 @@ div.weather-details {
   .today,
   .tomorrow,
   .yesterday {
-    width: 40%;
+    width: fit-content;
+    max-width: 720px;
   }
 }
 

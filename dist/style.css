@@ -253,6 +253,8 @@ div.weather-details {
 
 .content[visible] {
   display: grid;
+  height: 100vh;
+  width: 100vw;
 }
 
 .loading {
@@ -288,7 +290,8 @@ div.weather-details {
 .tomorrow,
 .yesterday {
   display: flex;
-  width: 420px;
+  width: 70vw;
+  max-width: fit-content;
   overflow: scroll;
   padding: 1rem;
   border-radius: 1rem;

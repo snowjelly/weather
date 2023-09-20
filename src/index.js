@@ -141,7 +141,6 @@ async function renderStage2() {
   const degreeHeader = document.querySelector(".degrees h1");
   document.querySelector(".loading").setAttribute("visible", "");
   const favWeatherData = await reloadFavWeatherData();
-  console.log(favWeatherData);
   document.querySelector(".loading").removeAttribute("visible");
   saveFavoriteWeatherData(favWeatherData);
   const tempF = favWeatherData.current.current.temp_f;
@@ -166,8 +165,18 @@ async function renderStage2() {
   showNavBtn.setAttribute("visible", "");
   weatherHeader.setAttribute("visible", "");
   renderBgColor(favWeatherData);
+}
 
-  console.log(favWeatherData);
+async function updateAllLocationWeatherData() {
+  const locationWeatherDataArray = getLocationWeatherData();
+  const promises = [];
+  for (let i = 0; i < locationWeatherDataArray.length; i += 1) {
+    const query = locationWeatherDataArray[i].name;
+    promises.push(getWeatherData(query));
+    updateLocationWeatherData(locationWeatherDataArray);
+  }
+  const updatedLocationWeatherDataArray = await Promise.all(promises);
+  updateLocationWeatherData(updatedLocationWeatherDataArray);
 }
 
 async function changeFavorite(e) {
@@ -201,7 +210,7 @@ function addLocationListEventListeners() {
   }
 }
 
-function renderStage3() {
+async function renderStage3() {
   const weatherHeader = document.querySelector(".weather-header");
   const content = document.querySelector(".content");
   const formBtns = document.querySelector(".form-button");
@@ -219,6 +228,9 @@ function renderStage3() {
 
   showForm();
   locationListDiv.innerHTML = "";
+  document.querySelector(".loading").setAttribute("visible", "");
+  await updateAllLocationWeatherData();
+  document.querySelector(".loading").removeAttribute("visible");
   renderStoredLocationList();
   addLocationListEventListeners();
   formBtns.insertBefore(cancelBtn, submitBtn);

@@ -317,6 +317,9 @@ div.weather-details {
 }
 
 .location-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 80%;
 }
 
@@ -327,6 +330,7 @@ div.weather-details {
   background-color: #94a3b8;
   border-radius: 0.4rem;
   box-shadow: 0 0 2px 1px #737373;
+  max-width: 50%;
 }
 
 .location-list-item:hover {
@@ -341,15 +345,22 @@ div.weather-details {
 .list-temp-container {
   display: flex;
   align-items: center;
+  padding-inline: 1rem;
 }
 
 .list-info {
   display: flex;
   justify-content: center;
   flex-direction: column;
+  padding-inline: 1rem;
 }
 
 .saved-locations {
   font-size: 1.4rem;
   margin: 0;
+}
+
+.list-temp {
+  width: fit-content;
+  white-space: nowrap;
 }

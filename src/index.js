@@ -190,8 +190,8 @@ async function changeFavorite(e) {
   return weatherData;
 }
 
-function cancelForm() {
-  document.querySelector(".cancel-btn").remove();
+function cancelForm(e) {
+  e.preventDefault();
   removeForm();
   renderStage2();
 }
@@ -213,13 +213,10 @@ function addLocationListEventListeners() {
 async function renderStage3() {
   const weatherHeader = document.querySelector(".weather-header");
   const content = document.querySelector(".content");
-  const formBtns = document.querySelector(".form-button");
   const locationListDiv = document.querySelector(".location-list");
-  const cancelBtn = document.createElement("button");
-  const submitBtn = document.querySelector(".submit-btn");
+  const cancelBtn = document.querySelector(".cancel-btn");
 
-  cancelBtn.classList.add("cancel-btn");
-  cancelBtn.textContent = "Cancel";
+  cancelBtn.setAttribute("visible", "");
   cancelBtn.addEventListener("click", cancelForm);
 
   showNavBtn.removeAttribute("visible");
@@ -233,7 +230,6 @@ async function renderStage3() {
   document.querySelector(".loading").removeAttribute("visible");
   renderStoredLocationList();
   addLocationListEventListeners();
-  formBtns.insertBefore(cancelBtn, submitBtn);
 }
 
 form.addEventListener("submit", (e) => {
@@ -244,7 +240,6 @@ form.addEventListener("submit", (e) => {
     .then((val) => {
       if (val !== undefined) {
         console.log("stage2");
-        document.querySelector(".cancel-btn").remove();
         removeForm();
         renderStage2();
       }

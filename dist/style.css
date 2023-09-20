@@ -105,6 +105,14 @@ fieldset {
   justify-content: end;
 }
 
+.cancel-btn {
+  visibility: hidden;
+}
+
+.cancel-btn[visible] {
+  visibility: visible;
+}
+
 .form-button > button {
   background-color: #d1d7df;
   border: 0;

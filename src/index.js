@@ -6,12 +6,23 @@ import {
   reloadFavWeatherData,
   saveFavoriteWeatherData,
   saveLocationWeatherData,
+  updateLocationWeatherData,
 } from "./localStorage";
 
 const form = document.querySelector("form");
 const showNavBtn = document.querySelector(".hamburger");
 const nav = document.querySelector("nav");
 const errorDiv = document.querySelector("#error");
+
+function findLocationByName(name) {
+  const locationList = getLocationWeatherData();
+  for (let i = 0; i < locationList.length; i += 1) {
+    if (locationList[i].name === name) {
+      return i;
+    }
+  }
+  return null;
+}
 
 function displayFormError(err) {
   errorDiv.textContent = err;
@@ -162,6 +173,10 @@ async function renderStage2() {
 async function changeFavorite(e) {
   const favWeatherQuery = getLocationQueryString(e);
   const weatherData = await getWeatherData(favWeatherQuery);
+  const selectedLocation = findLocationByName(favWeatherQuery);
+  const locationWeatherDataArray = getLocationWeatherData();
+  locationWeatherDataArray[selectedLocation] = weatherData;
+  updateLocationWeatherData(locationWeatherDataArray);
   console.log(weatherData);
   return weatherData;
 }
@@ -227,17 +242,6 @@ form.addEventListener("submit", (e) => {
 showNavBtn.addEventListener("click", () => {
   renderStage3();
 });
-
-function renderWeatherList() {
-  const weatherDataArray = getLocationWeatherData();
-
-  for (let i = 0; i < weatherDataArray.length; i += 1) {
-    const parentUl = document.querySelector("#list-locations");
-    parentUl.innerHTML = `
-    <li>${weatherDataArray[i].name}</li>
-  `;
-  }
-}
 
 // render stage2 every 15 minutes
 setInterval(() => {

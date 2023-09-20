@@ -138,6 +138,15 @@ nav[closing] {
   height: 100%;
 }
 
+.hamburger svg {
+  cursor: pointer;
+  border-radius: 0.2rem;
+}
+
+.hamburger svg:hover {
+  background-color: #737373;
+}
+
 @keyframes slide-right {
   0% {
     transform: translateX(-100%);
@@ -181,6 +190,10 @@ form.error {
 .form-button button:hover {
   background-color: #737373;
   box-shadow: 0 0 2px 1px #262626;
+}
+
+.form-button button:active {
+  transform: scale(0.9);
 }
 
 .form-button {
@@ -314,6 +327,15 @@ div.weather-details {
   background-color: #94a3b8;
   border-radius: 0.4rem;
   box-shadow: 0 0 2px 1px #737373;
+}
+
+.location-list-item:hover {
+  background-color: #737373;
+  cursor: pointer;
+}
+
+.location-list-item:active {
+  transform: scale(0.95);
 }
 
 .list-temp-container {

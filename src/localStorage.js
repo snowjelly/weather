@@ -39,6 +39,13 @@ async function saveLocationWeatherData() {
   return array;
 }
 
+function updateLocationWeatherData(locationWeatherDataArray) {
+  localStorage.setItem(
+    "locationWeatherData",
+    JSON.stringify(locationWeatherDataArray),
+  );
+}
+
 async function reloadFavWeatherData() {
   const favWeatherDataQuery = getFavoriteWeatherData().name;
   const reloadedFavWeatherData = await getWeatherData(favWeatherDataQuery);
@@ -52,4 +59,5 @@ export {
   getLocationWeatherData,
   getFavoriteWeatherData,
   reloadFavWeatherData,
+  updateLocationWeatherData,
 };

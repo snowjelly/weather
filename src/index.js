@@ -109,19 +109,25 @@ async function renderBgColor() {
 }
 
 async function renderHourly(day) {
+  const renderDay = document.querySelector(`.${day}`);
+  if (renderDay.children.length !== 0) {
+    renderDay.innerHTML = "";
+  }
   const favWeatherData = await reloadFavWeatherData();
   const currentTime = favWeatherData.current.current.last_updated.slice(11, 13);
-  const hours = document.querySelectorAll(`.time-${day}`);
-  for (let i = Math.floor(currentTime); i < hours.length; i += 1) {
-    hours[i].innerHTML = `
-    <div class="time">${i}:00</div>
-    <div class="condition-icon">
-      <img src="${iconSrcStringExtractor(
-        favWeatherData[day].hour[i].condition.icon,
-      )}"></img>
-    </div>
-    <p class="temp">${Math.round(favWeatherData[day].hour[i].temp_f)}°</p>
+  for (let i = Math.floor(currentTime); i < 24; i += 1) {
+    const renderHour = document.createElement("div");
+    renderHour.classList = `time-${day}`;
+    renderHour.innerHTML = `
+      <div class="time">${i}:00</div>
+      <div class="condition-icon">
+        <img src="${iconSrcStringExtractor(
+          favWeatherData[day].hour[i].condition.icon,
+        )}"></img>
+      </div>
+      <p class="temp">${Math.round(favWeatherData[day].hour[i].temp_f)}°</p>
     `;
+    renderDay.appendChild(renderHour);
   }
 }
 
@@ -159,8 +165,8 @@ async function renderStage2() {
   lowDiv.textContent = Math.round(low);
   feelsLikeDiv.textContent = `Feels like ${Math.round(feelsLike)}°`;
 
-  renderHourly("today", favWeatherData);
-  renderHourly("tomorrow", favWeatherData);
+  renderHourly("today");
+  renderHourly("tomorrow");
 
   showNavBtn.setAttribute("visible", "");
   weatherHeader.setAttribute("visible", "");

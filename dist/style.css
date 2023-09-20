@@ -65,6 +65,14 @@ form {
   padding: 1rem;
   width: 80%;
   box-shadow: 0 0 2px 1px #737373;
+  max-width: 40%;
+}
+
+@media screen and (max-width: 700px) {
+  form {
+    width: 100%;
+    max-width: none;
+  }
 }
 
 form > h1 {
@@ -85,6 +93,7 @@ fieldset {
   flex-direction: column;
   height: 100%;
   row-gap: 2rem;
+  padding: 3rem;
 }
 
 #enter-data[invisible] {
@@ -291,7 +300,6 @@ div.weather-details {
 .yesterday {
   display: flex;
   width: 70vw;
-  max-width: fit-content;
   overflow: scroll;
   padding: 1rem;
   border-radius: 1rem;
@@ -304,6 +312,14 @@ div.weather-details {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+@media screen and (min-width: 800px) {
+  .today,
+  .tomorrow,
+  .yesterday {
+    width: 40%;
+  }
 }
 
 .temp {

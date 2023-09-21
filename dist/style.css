@@ -355,6 +355,11 @@ div.weather-details {
   border-radius: 0.4rem;
   box-shadow: 0 0 2px 1px #737373;
   width: 100%;
+  align-items: center;
+}
+
+.trash:hover {
+  fill: red;
 }
 
 .location-list-item:hover {

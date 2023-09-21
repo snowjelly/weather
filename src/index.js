@@ -66,6 +66,7 @@ function getLocationQueryString(e) {
 function renderStoredLocationList() {
   const locationList = getLocationWeatherData();
   const locationListDiv = document.querySelector(".location-list");
+  locationListDiv.innerHTML = "";
   console.log(locationList);
 
   for (let i = 0; i < locationList.length; i += 1) {
@@ -88,6 +89,7 @@ function renderStoredLocationList() {
         locationList[i].current.current.condition.icon,
       )}"></img>
     </div>
+    <svg class="trash" data-id="${i}" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path data-id="${i}" d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>
     `;
     locationListDiv.appendChild(location);
   }
@@ -202,7 +204,23 @@ function cancelForm(e) {
   renderStage2();
 }
 
+function removeLocation(e) {
+  const locationIdToRemove = e.target.dataset.id;
+  const locationWeatherData = getLocationWeatherData();
+  if (locationWeatherData.length === 1) {
+    alert("Cannot remove remaining location");
+    return;
+  }
+  locationWeatherData.splice(locationIdToRemove, 1);
+  updateLocationWeatherData(locationWeatherData);
+  renderStoredLocationList();
+}
+
 async function stage4(e) {
+  if (e.target.nodeName === "path" || e.target.nodeName === "svg") {
+    removeLocation(e);
+    return;
+  }
   const newWeatherData = await changeFavorite(e);
   saveFavoriteWeatherData(newWeatherData);
   await renderStage2();
